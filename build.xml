@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<project name="tic-tac-toe" default="run">
+    <target name="clean">
+        <delete dir="build"/>
+    </target>
+    <target name="compile" depends="clean">
+        <mkdir dir="build/classes"/>
+        <javac destdir="build/classes" includeantruntime="false">
+            <src path="src"/>
+            <classpath>
+            <pathelement location="lib/junit-4.13.1.jar"/>
+            <pathelement location="lib/hamcrest-2.2.jar"/>
+            </classpath>
+        </javac>
+    </target>
+    <target name="test" depends="compile">
+    <junit>
+        <test name="UnitTests"/>
+        <classpath>
+            <pathelement location="build/classes"/>
+            <pathelement location="lib/junit-4.13.1.jar"/>
+            <pathelement location="lib/hamcrest-2.2.jar"/>
+        </classpath>
+    </junit>
+    </target>
+    <target name="run" depends="test">
+        <java classname="Main" classpath="build/classes" fork="true"/>
+    </target>
+</project>
